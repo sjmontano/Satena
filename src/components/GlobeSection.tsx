@@ -97,7 +97,7 @@ export default function GlobeSection() {
   }, [globeReady])
 
   return (
-    <section className="relative py-16 md:py-20 bg-[#0B1119] overflow-x-hidden">
+    <section id="red" className="relative py-16 md:py-20 bg-[#0B1119] overflow-x-hidden">
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#CB1B1C] via-[#FCD404] to-[#CB1B1C] z-10" />
 
       <motion.div

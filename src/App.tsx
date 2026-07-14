@@ -4,6 +4,7 @@ import FlotaAviones from './components/FlotaAviones'
 import GlobeSection from './components/GlobeSection'
 import Hero from './components/Hero'
 import Navbar from './components/Navbar'
+import ProgressIndicator from './components/ProgressIndicator'
 import QuienesSomos from './components/QuienesSomos'
 import VuelosRutas from './components/VuelosRutas'
 import { I18nProvider } from './i18n'
@@ -16,10 +17,11 @@ export default function App() {
         <Hero />
         <QuienesSomos />
         <DestinosTuristicos />
-        <VuelosRutas />
         <GlobeSection />
+        <VuelosRutas />
         <FlotaAviones />
         <Aeropuertos />
+        <ProgressIndicator />
         {/* <FormularioReserva /> */}
         {/* <Contacto /> */}
         {/*<Footer />*/}

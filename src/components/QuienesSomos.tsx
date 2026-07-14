@@ -69,7 +69,7 @@ export default function QuienesSomos() {
           >
             <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1436491865332-7a61a109b3e2?w=800&q=80"
+                src="https://images.unsplash.com/photo-1570710891163-6d3b5c47248b?w=800&q=80"
                 alt="SATENA ATR 42"
                 className="w-full h-full object-cover"
               />

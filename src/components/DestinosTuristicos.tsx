@@ -1,12 +1,16 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { MapPin, ChevronRight } from 'lucide-react'
+import { MapPin, ChevronRight, ChevronDown } from 'lucide-react'
 import { useIdioma } from '../i18n'
 import { destinos, type Destino } from '../data/destinos'
+
+const INICIALES = 6
 
 export default function DestinosTuristicos() {
   const { t } = useIdioma()
   const [selected, setSelected] = useState<Destino | null>(null)
+  const [showAll, setShowAll] = useState(false)
+  const visible = showAll ? destinos : destinos.slice(0, INICIALES)
 
   return (
     <section id="destinos" className="relative py-24 lg:py-32 bg-gray-50">
@@ -27,7 +31,7 @@ export default function DestinosTuristicos() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {destinos.map((destino, i) => (
+          {visible.map((destino, i) => (
             <motion.div
               key={destino.nombre}
               initial={{ opacity: 0, y: 30 }}
@@ -61,18 +65,39 @@ export default function DestinosTuristicos() {
           ))}
         </div>
 
+        {destinos.length > INICIALES && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center mt-8"
+          >
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="inline-flex items-center gap-2 px-6 py-2.5 bg-white border border-gray-200 text-gray-600 font-medium rounded-full hover:border-gray-300 hover:text-gray-800 transition-all shadow-sm"
+            >
+              {showAll ? 'Ver menos' : `Ver más (${destinos.length - INICIALES})`}
+              <ChevronDown className={`w-4 h-4 transition-transform ${showAll ? 'rotate-180' : ''}`} />
+            </button>
+          </motion.div>
+        )}
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-center mt-12"
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="relative mt-20 text-center"
         >
+          <div className="absolute left-1/2 -top-8 w-px h-8 bg-gradient-to-b from-transparent to-gray-300" />
+          <p className="text-sm text-gray-400 mb-4 max-w-md mx-auto leading-relaxed">
+            {t('globe.bridge_desc')}
+          </p>
           <a
-            href="#vuelos"
+            href="#red"
             className="inline-flex items-center gap-2 px-8 py-3 bg-[#CB1B1C] text-white font-semibold rounded-full hover:bg-[#A31516] transition-all hover:scale-105 shadow-lg"
           >
-            {t('destinos.explorar')} <ChevronRight className="w-4 h-4" />
+            {t('globe.bridge')} <ChevronRight className="w-4 h-4" />
           </a>
         </motion.div>
       </div>

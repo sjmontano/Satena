@@ -11,7 +11,7 @@ export const destinos: Destino[] = [
     nombre: 'Caño Cristales',
     region: 'Meta',
     descripcion: 'El río de los cinco colores, considerado el más hermoso del mundo.',
-    imagen: 'https://images.unsplash.com/photo-1586016413664-2c1c7c0b5e5c?w=800&q=80',
+    imagen: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
     destacado: true,
   },
   {
@@ -57,7 +57,7 @@ export const destinos: Destino[] = [
     nombre: 'Villavicencio',
     region: 'Meta',
     descripcion: 'Capital del Llano, puerta de entrada a los Llanos Orientales.',
-    imagen: 'https://images.unsplash.com/photo-1470071459604-7b8ec44ffd5d?w=800&q=80',
+    imagen: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80',
   },
   {
     nombre: 'San José del Guaviare',
@@ -69,7 +69,7 @@ export const destinos: Destino[] = [
     nombre: 'Mompox',
     region: 'Bolívar',
     descripcion: 'Ciudad museo del Caribe colombiano, patrimonio histórico de Colombia.',
-    imagen: 'https://images.unsplash.com/photo-1599940824399-b11787f7d5e9?w=800&q=80',
+    imagen: 'https://images.unsplash.com/photo-1518639192443-5f04c5c9c1c5?w=800&q=80',
   },
   {
     nombre: 'Quibdó',

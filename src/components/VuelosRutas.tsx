@@ -1,17 +1,21 @@
 import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
-import { Search, Plane } from 'lucide-react'
+import { Search, Plane, ChevronDown } from 'lucide-react'
 import { useIdioma } from '../i18n'
 import { rutas, origenes } from '../data/rutas'
+
+const INICIALES = 10
 
 export default function VuelosRutas() {
   const { t } = useIdioma()
   const [filtro, setFiltro] = useState('')
+  const [showAll, setShowAll] = useState(false)
 
   const filtered = useMemo(
     () => filtro ? rutas.filter((r) => r.origen === filtro || r.destino === filtro) : rutas,
     [filtro]
   )
+  const visible = showAll ? filtered : filtered.slice(0, INICIALES)
 
   return (
     <section id="vuelos" className="relative py-24 lg:py-32 bg-white">
@@ -66,7 +70,7 @@ export default function VuelosRutas() {
               </tr>
             </thead>
             <tbody>
-              {filtered.map((ruta, i) => (
+              {visible.map((ruta, i) => (
                 <motion.tr
                   key={`${ruta.origen}-${ruta.destino}`}
                   initial={{ opacity: 0, x: -20 }}
@@ -102,9 +106,37 @@ export default function VuelosRutas() {
           </table>
         </div>
 
+        {filtered.length > INICIALES && (
+          <div className="text-center mt-6">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="inline-flex items-center gap-2 px-6 py-2.5 bg-gray-50 border border-gray-200 text-gray-600 font-medium rounded-full hover:border-gray-300 hover:text-gray-800 transition-all shadow-sm"
+            >
+              {showAll ? 'Ver menos' : `Ver más (${filtered.length - INICIALES})`}
+              <ChevronDown className={`w-4 h-4 transition-transform ${showAll ? 'rotate-180' : ''}`} />
+            </button>
+          </div>
+        )}
+
         <p className="text-center text-sm text-gray-400 mt-4">
           {filtered.length} {t('vuelos.resultados')}
         </p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mt-12"
+        >
+          <p className="text-sm text-gray-400 mb-4">{t('vuelos.reservar_desc')}</p>
+          <a
+            href="#inicio"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-[#CB1B1C] text-white font-semibold rounded-full hover:bg-[#A31516] transition-all hover:scale-105 shadow-lg"
+          >
+            <Plane className="w-4 h-4" /> {t('vuelos.reservar')}
+          </a>
+        </motion.div>
       </div>
     </section>
   )

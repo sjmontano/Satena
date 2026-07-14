@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'
-import { Users, Gauge, Map, Crosshair } from 'lucide-react'
+import { Users, Gauge, Map, Crosshair, Route } from 'lucide-react'
 import { useIdioma } from '../i18n'
 import { flota } from '../data/flota'
+import { rutas } from '../data/rutas'
 
 const specs = [
   { icon: Users, key: 'capacidad' },
@@ -9,6 +10,14 @@ const specs = [
   { icon: Map, key: 'alcance' },
   { icon: Crosshair, key: 'uso' },
 ]
+
+function rutasPorAvion(nombre: string): { origen: string; destino: string }[] {
+  const corto = nombre.split(' ')[0]
+  return rutas
+    .filter((r) => r.aeronave.startsWith(corto))
+    .slice(0, 5)
+    .map((r) => ({ origen: r.origen, destino: r.destino }))
+}
 
 export default function FlotaAviones() {
   const { t } = useIdioma()
@@ -69,6 +78,25 @@ export default function FlotaAviones() {
                       </div>
                     </div>
                   ))}
+                </div>
+
+                <div className="mt-4 pt-4 border-t border-gray-100">
+                  <div className="flex items-center gap-1.5 text-xs text-gray-400 mb-2">
+                    <Route className="w-3 h-3" />
+                    {t('flota.rutas_operadas')}
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {rutasPorAvion(avion.nombre).map((r, ri) => (
+                      <span key={ri} className="px-2 py-0.5 bg-gray-100 text-gray-600 text-[10px] font-medium rounded-full">
+                        {r.origen}–{r.destino}
+                      </span>
+                    ))}
+                    {rutas.filter((r) => r.aeronave.startsWith(avion.nombre.split(' ')[0])).length > 5 && (
+                      <span className="px-2 py-0.5 text-gray-400 text-[10px]">
+                        +{rutas.filter((r) => r.aeronave.startsWith(avion.nombre.split(' ')[0])).length - 5} más
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
             </motion.div>

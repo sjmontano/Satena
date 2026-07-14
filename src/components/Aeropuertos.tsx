@@ -1,7 +1,12 @@
 import { motion } from 'framer-motion'
-import { Building2, MapPin, Star, Plane } from 'lucide-react'
+import { Building2, MapPin, Star, Plane, ArrowRight } from 'lucide-react'
 import { useIdioma } from '../i18n'
 import { aeropuertos } from '../data/aeropuertos'
+import { rutas } from '../data/rutas'
+
+function rutasDesde(ciudad: string): number {
+  return rutas.filter((r) => r.origen === ciudad || r.destino === ciudad).length
+}
 
 export default function Aeropuertos() {
   const { t } = useIdioma()
@@ -74,9 +79,18 @@ export default function Aeropuertos() {
                   {ap.ciudad}
                 </span>
               </div>
-              <p className={`text-sm leading-relaxed ${ap.esHub ? 'text-white/80' : 'text-gray-600'}`}>
+              <p className={`text-sm leading-relaxed mb-3 ${ap.esHub ? 'text-white/80' : 'text-gray-600'}`}>
                 {ap.descripcion}
               </p>
+              <div className={`flex items-center justify-between pt-3 border-t ${ap.esHub ? 'border-white/20' : 'border-gray-200'}`}>
+                <span className={`text-xs font-semibold ${ap.esHub ? 'text-white/60' : 'text-gray-400'}`}>
+                  {rutasDesde(ap.ciudad)} rutas activas
+                </span>
+                <div className={`flex items-center gap-1 text-xs font-medium ${ap.esHub ? 'text-[#FCD404]' : 'text-[#CB1B1C]'}`}>
+                  <Plane className="w-3 h-3" />
+                  {rutasDesde(ap.ciudad)} <ArrowRight className="w-2.5 h-2.5" />
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>

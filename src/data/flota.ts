@@ -17,7 +17,7 @@ export const flota: Avion[] = [
     velocidad: '556 km/h',
     alcance: '1,328 km',
     uso: 'Rutas regionales y pistas cortas',
-    imagen: 'https://images.unsplash.com/photo-1436491865332-7a61a109b3e2?w=600&q=80',
+    imagen: 'https://images.unsplash.com/photo-1570710891163-6d3b5c47248b?w=600&q=80',
     descripcion: 'El caballo de batalla de SATENA para rutas regionales. Ideal para operar en aeropuertos con pistas cortas y condiciones geográficas complejas.',
   },
   {
