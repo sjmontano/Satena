@@ -14,7 +14,7 @@ interface VueloResultado {
   llegada: string
 }
 
-function generarPrecio(origen: string, destino: string): number {
+function generarPrecio(_origen: string, _destino: string): number {
   const base = 180000
   const varianza = Math.random() * 250000
   return Math.round(base + varianza)

@@ -10,7 +10,6 @@ const menuItems = [
   { key: 'nav.vuelos', href: '#vuelos' },
   { key: 'nav.flota', href: '#flota' },
   { key: 'nav.aeropuertos', href: '#aeropuertos' },
-  {/* key: 'nav.contacto', href: '#contacto' */ }
 ]
 
 export default function Navbar() {

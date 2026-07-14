@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Phone, MessageCircle, Mail, MapPin, Send, Check } from 'lucide-react'
+import { Phone, MessageCircle, MapPin, Send, Check } from 'lucide-react'
 import { useIdioma } from '../i18n'
 
 export default function Contacto() {
