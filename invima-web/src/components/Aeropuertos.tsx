@@ -1,15 +1,15 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Plane, Search, FileText, Package, FlaskRound as Flask, Ban, CheckCircle, Building2, MapPin, Users } from 'lucide-react'
+import { Plane, Search, FileText, Package, FlaskRound as Flask, Ban, CheckCircle, Building2, MapPin, Users, ClipboardList, Shield, Truck, Ship } from 'lucide-react'
 
 const acciones = [
   { icon: Search, text: 'Inspecciona alimentos y bebidas que ingresan o salen del país.' },
   { icon: FileText, text: 'Controla medicamentos importados y exportados.' },
   { icon: Package, text: 'Verifica dispositivos médicos y productos biológicos.' },
-  { icon: Flask, text: 'Toma muestras para análisis cuando es necesario.' },
+  { icon: Flask, text: 'Toma muestras para análisis en laboratorio cuando es necesario.' },
   { icon: Ban, text: 'Impide el ingreso de productos sin registro sanitario o contaminados.' },
-  { icon: CheckCircle, text: 'Autoriza o rechaza el ingreso según la normatividad sanitaria.' },
-  { icon: Building2, text: 'Trabaja en puertos, aeropuertos y pasos fronterizos.' },
+  { icon: CheckCircle, text: 'Expedición del Certificado de Inspección Sanitaria (CIS).' },
+  { icon: Building2, text: 'Opera en puertos, aeropuertos y pasos fronterizos (PAPF).' },
 ]
 
 const entradas = [
@@ -33,8 +33,15 @@ const gruposTerritoriales = [
   'Eje Cafetero', 'Pacífico', 'Amazonía', 'Antioquia', 'Santanderes',
 ]
 
+const tiposInspeccion = [
+  { icon: FileText, title: 'Documental', desc: 'Revisión de registros sanitarios, facturas, certificados de origen y libre venta.' },
+  { icon: Package, title: 'Física', desc: 'Inspección directa de la carga, empaques, etiquetado y condiciones de transporte.' },
+  { icon: Flask, title: 'Muestreo', desc: 'Toma de muestras para análisis microbiológicos, fisicoquímicos y de composición.' },
+]
+
 export default function AeropuertosInvima() {
   const [showTerritorial, setShowTerritorial] = useState(false)
+  const [showInspeccion, setShowInspeccion] = useState<number | null>(null)
 
   return (
     <section id="aeropuertos" className="relative py-24 lg:py-32 bg-invima-50">
@@ -47,13 +54,14 @@ export default function AeropuertosInvima() {
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-1.5 bg-white text-invima-600 text-xs font-semibold rounded-full tracking-wide shadow-sm mb-4">
-            Control Fronterizo
+            Salud Aeroportuaria
           </span>
           <h2 className="text-4xl md:text-5xl font-bold text-invima-900 mb-4">
-            INVIMA en aeropuertos
+            Control sanitario en puertos y aeropuertos
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Presencia activa en todos los puntos de entrada y salida del país para garantizar la seguridad sanitaria.
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            El INVIMA, a través del Grupo PAPF (Puertos, Aeropuertos y Pasos de Frontera), es la primera barrera sanitaria 
+            que protege a Colombia de productos que puedan afectar la salud pública.
           </p>
         </motion.div>
 
@@ -66,11 +74,11 @@ export default function AeropuertosInvima() {
           >
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-salud-light rounded-2xl flex items-center justify-center">
-                <Plane className="w-6 h-6 text-salud" />
+                <Shield className="w-6 h-6 text-salud" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-invima-900">Control en fronteras</h3>
-                <p className="text-sm text-gray-500">Acciones en puntos de entrada y salida</p>
+                <h3 className="text-xl font-bold text-invima-900">Primera barrera sanitaria</h3>
+                <p className="text-sm text-gray-500">Grupo PAPF — Control en puntos de entrada</p>
               </div>
             </div>
             <div className="space-y-3">
@@ -190,13 +198,71 @@ export default function AeropuertosInvima() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center"
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mb-16"
+        >
+          <div className="bg-white rounded-2xl p-6 lg:p-8 border border-gray-100 shadow-sm">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 bg-invima-50 rounded-xl flex items-center justify-center">
+                <ClipboardList className="w-5 h-5 text-invima-600" />
+              </div>
+              <div>
+                <h3 className="font-bold text-gray-900">Tipos de inspección sanitaria</h3>
+                <p className="text-xs text-gray-500">Modelo IVC con enfoque de riesgos</p>
+              </div>
+            </div>
+            <div className="grid sm:grid-cols-3 gap-4">
+              {tiposInspeccion.map((t, i) => (
+                <motion.div
+                  key={t.title}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: i * 0.08 }}
+                  onMouseEnter={() => setShowInspeccion(i)}
+                  onMouseLeave={() => setShowInspeccion(null)}
+                  className="bg-gray-50 rounded-xl p-5 border border-gray-100 hover:border-invima-200 hover:bg-invima-50 transition-all duration-200 cursor-default"
+                >
+                  <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm">
+                    <t.icon className="w-5 h-5 text-invima-600" />
+                  </div>
+                  <h4 className="font-bold text-sm text-gray-900 mb-1">{t.title}</h4>
+                  <div
+                    className="overflow-hidden transition-all duration-300 ease-in-out"
+                    style={{ maxHeight: showInspeccion === i ? '200px' : '0px', opacity: showInspeccion === i ? 1 : 0 }}
+                  >
+                    <div className="pt-2 border-t border-invima-100">
+                      <p className="text-xs text-invima-600 leading-relaxed">{t.desc}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="text-center space-y-3"
         >
           <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-white rounded-xl border border-gray-100 shadow-sm">
             <MapPin className="w-4 h-4 text-invima-500" />
             <span className="text-sm text-gray-600">
               <strong className="text-invima-900">12 puntos de control</strong> — Puertos, aeropuertos y pasos fronterizos
+            </span>
+          </div>
+          <div className="flex flex-wrap justify-center gap-2">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-lg border border-gray-100 text-xs text-gray-500">
+              <Ship className="w-3.5 h-3.5 text-invima-400" /> Puertos marítimos
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-lg border border-gray-100 text-xs text-gray-500">
+              <Plane className="w-3.5 h-3.5 text-invima-400" /> Aeropuertos internacionales
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white rounded-lg border border-gray-100 text-xs text-gray-500">
+              <Truck className="w-3.5 h-3.5 text-invima-400" /> Pasos fronterizos terrestres
             </span>
           </div>
         </motion.div>
