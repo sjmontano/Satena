@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --color-invima-900: #0A2A4A;
+  --color-invima-800: #0F3B5E;
+  --color-invima-700: #144C72;
+  --color-invima-600: #1A5F8A;
+  --color-invima-500: #2E86C1;
+  --color-invima-400: #54A0D4;
+  --color-invima-300: #7BBBE0;
+  --color-invima-200: #A8D5EC;
+  --color-invima-100: #D4EAF7;
+  --color-invima-50: #F0F7FC;
+  --color-salud: #27AE60;
+  --color-salud-light: #E8F8F0;
+  --color-alerta: #E67E22;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
