@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
-import { Shield, ChevronDown, Building, Activity } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Shield, ChevronDown, Building, Activity, Phone, MapPin } from 'lucide-react'
 
 export default function Hero() {
   const [count, setCount] = useState(0)
   const counted = useRef(false)
+  const [showDirector, setShowDirector] = useState(false)
 
   useEffect(() => {
     if (counted.current) return
@@ -103,7 +104,11 @@ export default function Hero() {
             className="hidden lg:flex justify-center"
           >
             <div className="relative">
-              <div className="w-72 h-72 rounded-full bg-invima-600/30 border border-invima-400/20 flex items-center justify-center backdrop-blur-sm">
+              <div
+                onMouseEnter={() => setShowDirector(true)}
+                onMouseLeave={() => setShowDirector(false)}
+                className="w-72 h-72 rounded-full bg-invima-600/30 border border-invima-400/20 flex items-center justify-center backdrop-blur-sm cursor-default"
+              >
                 <div className="w-52 h-52 rounded-full bg-invima-500/20 border border-invima-300/20 flex items-center justify-center">
                   <div className="w-36 h-36 rounded-full bg-invima-400/20 border border-invima-200/20 flex items-center justify-center">
                     <Shield className="w-16 h-16 text-salud" />
@@ -115,6 +120,30 @@ export default function Hero() {
                 transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
                 className="absolute inset-0 rounded-full border border-dashed border-invima-400/20"
               />
+              <AnimatePresence>
+                {showDirector && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full mt-4 w-64 bg-white rounded-xl shadow-xl border border-gray-100 p-4 z-20"
+                  >
+                    <p className="text-sm font-bold text-invima-900">Dr. Francisco Rossi Buenaventura</p>
+                    <p className="text-xs text-invima-500 font-medium">Director General</p>
+                    <div className="mt-3 pt-3 border-t border-gray-100 space-y-1.5">
+                      <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                        <MapPin className="w-3 h-3 text-invima-400" />
+                        <span>Cra 10 # 64-28, Bogotá</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                        <Phone className="w-3 h-3 text-invima-400" />
+                        <span>(+57) (601) 242 50 00</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
         </div>

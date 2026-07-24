@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Shield, ThumbsUp, Ban, Globe, Heart } from 'lucide-react'
+import { Shield, ThumbsUp, Ban, Globe, Heart, Award } from 'lucide-react'
 
 const items = [
   { icon: Heart, text: 'Protege la salud de los colombianos' },
@@ -11,7 +11,7 @@ const items = [
 
 export default function Importancia() {
   return (
-    <section className="relative py-24 lg:py-32 bg-invima-900">
+    <section id="importancia" className="relative py-24 lg:py-32 bg-invima-900">
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-salud via-invima-300 to-salud" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -56,7 +56,7 @@ export default function Importancia() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center mt-16"
+          className="text-center mt-16 space-y-4"
         >
           <div className="inline-flex items-center gap-2 px-6 py-3 bg-salud/20 rounded-full border border-salud/30">
             <Shield className="w-5 h-5 text-salud" />
@@ -64,6 +64,19 @@ export default function Importancia() {
               INVIMA — Proteger la salud es nuestro compromiso
             </span>
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-amber-500/15 rounded-full border border-amber-400/30"
+          >
+            <Award className="w-4 h-4 text-amber-400" />
+            <span className="text-xs text-amber-300 font-medium tracking-wide">
+              Entidad más transparente del sector salud — 2015 / 2016
+            </span>
+          </motion.div>
         </motion.div>
       </div>
     </section>

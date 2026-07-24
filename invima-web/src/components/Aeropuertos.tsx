@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion'
-import { Plane, Search, FileText, Package, FlaskRound as Flask, Ban, CheckCircle, Building2 } from 'lucide-react'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Plane, Search, FileText, Package, FlaskRound as Flask, Ban, CheckCircle, Building2, MapPin, Users } from 'lucide-react'
 
 const acciones = [
   { icon: Search, text: 'Inspecciona alimentos y bebidas que ingresan o salen del país.' },
@@ -27,7 +28,22 @@ const salidas = [
   'Avala calidad de productos colombianos',
 ]
 
+const gruposTerritoriales = [
+  'Costa Caribe', 'Centro Occidente', 'Centro Oriente', 'Orinoquía',
+  'Eje Cafetero', 'Pacífico', 'Amazonía', 'Antioquia', 'Santanderes',
+]
+
+const puntosControl = [
+  'Puerto de Buenaventura', 'Puerto de Cartagena', 'Puerto de Barranquilla',
+  'Puerto de Santa Marta', 'Aeropuerto El Dorado', 'Aeropuerto José María Córdova',
+  'Aeropuerto Alfonso Bonilla Aragón', 'Paso fronterizo de Cúcuta',
+  'Paso fronterizo de Ipiales', 'Paso fronterizo de Leticia',
+  'Paso fronterizo de Arauca', 'Paso fronterizo de Maicao',
+]
+
 export default function AeropuertosInvima() {
+  const [showTerritorial, setShowTerritorial] = useState(false)
+
   return (
     <section id="aeropuertos" className="relative py-24 lg:py-32 bg-invima-50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -82,6 +98,43 @@ export default function AeropuertosInvima() {
                 </motion.div>
               ))}
             </div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: 0.4 }}
+              onMouseEnter={() => setShowTerritorial(true)}
+              onMouseLeave={() => setShowTerritorial(false)}
+              className="mt-6 bg-white rounded-xl p-5 border border-gray-100 shadow-sm cursor-default"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <Users className="w-5 h-5 text-invima-600" />
+                <span className="font-bold text-gray-900 text-sm">9 Grupos Territoriales</span>
+              </div>
+              <p className="text-xs text-gray-500 mb-2">Cobertura nacional para inspección y vigilancia</p>
+              <AnimatePresence>
+                {showTerritorial && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="flex flex-wrap gap-1.5 mt-2 pt-3 border-t border-gray-100">
+                      {gruposTerritoriales.map((g) => (
+                        <span key={g} className="px-2.5 py-1 bg-invima-50 text-invima-600 text-xs rounded-full font-medium">{g}</span>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              <div className="flex items-center gap-1 mt-2 text-[10px] text-gray-400">
+                <MapPin className="w-3 h-3" />
+                <span>12 puntos de control — Pasa el cursor para ver los grupos</span>
+              </div>
+            </motion.div>
           </motion.div>
 
           <div className="space-y-6">
@@ -140,6 +193,21 @@ export default function AeropuertosInvima() {
             </motion.div>
           </div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center"
+        >
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 bg-white rounded-xl border border-gray-100 shadow-sm">
+            <MapPin className="w-4 h-4 text-invima-500" />
+            <span className="text-sm text-gray-600">
+              <strong className="text-invima-900">12 puntos de control</strong> — Puertos, aeropuertos y pasos fronterizos
+            </span>
+          </div>
+        </motion.div>
       </div>
     </section>
   )

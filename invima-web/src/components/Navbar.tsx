@@ -7,7 +7,9 @@ const links = [
   { href: '#objetivos', label: 'Objetivos' },
   { href: '#funciones', label: 'Funciones' },
   { href: '#controla', label: '¿Qué controla?' },
+  { href: '#datos-clave', label: 'Datos' },
   { href: '#aeropuertos', label: 'Aeropuertos' },
+  { href: '#directivo', label: 'Director' },
 ]
 
 export default function Navbar() {
