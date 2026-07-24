@@ -33,14 +33,6 @@ const gruposTerritoriales = [
   'Eje Cafetero', 'Pacífico', 'Amazonía', 'Antioquia', 'Santanderes',
 ]
 
-const puntosControl = [
-  'Puerto de Buenaventura', 'Puerto de Cartagena', 'Puerto de Barranquilla',
-  'Puerto de Santa Marta', 'Aeropuerto El Dorado', 'Aeropuerto José María Córdova',
-  'Aeropuerto Alfonso Bonilla Aragón', 'Paso fronterizo de Cúcuta',
-  'Paso fronterizo de Ipiales', 'Paso fronterizo de Leticia',
-  'Paso fronterizo de Arauca', 'Paso fronterizo de Maicao',
-]
-
 export default function AeropuertosInvima() {
   const [showTerritorial, setShowTerritorial] = useState(false)
 
