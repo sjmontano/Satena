@@ -8,7 +8,6 @@ import DatosClave from './components/DatosClave'
 import AeropuertosInvima from './components/Aeropuertos'
 import Medidas from './components/Medidas'
 import Entidades from './components/Entidades'
-import Directivo from './components/Directivo'
 import Importancia from './components/Importancia'
 import Footer from './components/Footer'
 
@@ -25,7 +24,6 @@ export default function App() {
       <AeropuertosInvima />
       <Medidas />
       <Entidades />
-      <Directivo />
       <Importancia />
       <Footer />
     </div>
