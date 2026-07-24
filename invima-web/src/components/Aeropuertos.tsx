@@ -73,12 +73,68 @@ export default function AeropuertosInvima() {
             transition={{ duration: 0.6 }}
           >
             <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center">
+                <svg className="w-6 h-6 text-invima-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-invima-900">Lo que entra al país</h3>
+                <p className="text-sm text-gray-500">Control de importaciones</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+              <ul className="space-y-3">
+                {entradas.map((e, i) => (
+                  <li key={i} className="flex items-center gap-3 text-sm text-gray-700">
+                    <span className="w-1.5 h-1.5 rounded-full bg-salud shrink-0" />
+                    {e}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 bg-invima-100 rounded-2xl flex items-center justify-center">
+                <svg className="w-6 h-6 text-invima-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-invima-900">Lo que sale del país</h3>
+                <p className="text-sm text-gray-500">Control de exportaciones</p>
+              </div>
+            </div>
+            <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+              <ul className="space-y-3">
+                {salidas.map((s, i) => (
+                  <li key={i} className="flex items-center gap-3 text-sm text-gray-700">
+                    <span className="w-1.5 h-1.5 rounded-full bg-invima-500 shrink-0" />
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-salud-light rounded-2xl flex items-center justify-center">
                 <Shield className="w-6 h-6 text-salud" />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-invima-900">Primera barrera sanitaria</h3>
-                <p className="text-sm text-gray-500">Grupo PAPF — Control en puntos de entrada</p>
+                <p className="text-sm text-gray-500">Grupo PAPF — Puertos, Aeropuertos y Pasos de Frontera</p>
               </div>
             </div>
             <div className="space-y-3">
@@ -98,21 +154,66 @@ export default function AeropuertosInvima() {
                 </motion.div>
               ))}
             </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm">
+                <ClipboardList className="w-5 h-5 text-invima-600" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-invima-900">Tipos de inspección</h3>
+                <p className="text-xs text-gray-500">Modelo IVC con enfoque de riesgos</p>
+              </div>
+            </div>
+            <div className="space-y-3">
+              {tiposInspeccion.map((t, i) => (
+                <motion.div
+                  key={t.title}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-30px' }}
+                  transition={{ duration: 0.3, delay: i * 0.06 }}
+                  onMouseEnter={() => setShowInspeccion(i)}
+                  onMouseLeave={() => setShowInspeccion(null)}
+                  className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm cursor-default"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 bg-invima-50 rounded-lg flex items-center justify-center shrink-0">
+                      <t.icon className="w-4 h-4 text-invima-600" />
+                    </div>
+                    <span className="text-sm font-semibold text-gray-800">{t.title}</span>
+                  </div>
+                  <div
+                    className="overflow-hidden transition-all duration-300 ease-in-out"
+                    style={{ maxHeight: showInspeccion === i ? '200px' : '0px', opacity: showInspeccion === i ? 1 : 0 }}
+                  >
+                    <div className="pt-2 mt-2 border-t border-invima-100">
+                      <p className="text-xs text-invima-600 leading-relaxed">{t.desc}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
 
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: 0.4 }}
+              transition={{ duration: 0.3, delay: 0.3 }}
               onMouseEnter={() => setShowTerritorial(true)}
               onMouseLeave={() => setShowTerritorial(false)}
-              className="mt-6 bg-white rounded-xl p-5 border border-gray-100 shadow-sm cursor-default"
+              className="mt-3 bg-white rounded-xl p-4 border border-gray-100 shadow-sm cursor-default"
             >
-              <div className="flex items-center gap-3 mb-3">
-                <Users className="w-5 h-5 text-invima-600" />
+              <div className="flex items-center gap-2 mb-2">
+                <Users className="w-4 h-4 text-invima-600" />
                 <span className="font-bold text-gray-900 text-sm">9 Grupos Territoriales</span>
               </div>
-              <p className="text-xs text-gray-500 mb-2">Cobertura nacional para inspección y vigilancia</p>
               <AnimatePresence>
                 {showTerritorial && (
                   <motion.div
@@ -122,7 +223,7 @@ export default function AeropuertosInvima() {
                     transition={{ duration: 0.2 }}
                     className="overflow-hidden"
                   >
-                    <div className="flex flex-wrap gap-1.5 mt-2 pt-3 border-t border-gray-100">
+                    <div className="flex flex-wrap gap-1.5 mt-2 pt-2 border-t border-gray-100">
                       {gruposTerritoriales.map((g) => (
                         <span key={g} className="px-2.5 py-1 bg-invima-50 text-invima-600 text-xs rounded-full font-medium">{g}</span>
                       ))}
@@ -136,110 +237,7 @@ export default function AeropuertosInvima() {
               </div>
             </motion.div>
           </motion.div>
-
-          <div className="space-y-6">
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center">
-                  <svg className="w-6 h-6 text-invima-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-invima-900">Lo que entra al país</h3>
-                  <p className="text-sm text-gray-500">Control de importaciones</p>
-                </div>
-              </div>
-              <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-                <ul className="space-y-3">
-                  {entradas.map((e, i) => (
-                    <li key={i} className="flex items-center gap-3 text-sm text-gray-700">
-                      <span className="w-1.5 h-1.5 rounded-full bg-salud shrink-0" />
-                      {e}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-invima-100 rounded-2xl flex items-center justify-center">
-                  <svg className="w-6 h-6 text-invima-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-invima-900">Lo que sale del país</h3>
-                  <p className="text-sm text-gray-500">Control de exportaciones</p>
-                </div>
-              </div>
-              <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-                <ul className="space-y-3">
-                  {salidas.map((s, i) => (
-                    <li key={i} className="flex items-center gap-3 text-sm text-gray-700">
-                      <span className="w-1.5 h-1.5 rounded-full bg-invima-500 shrink-0" />
-                      {s}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
-          </div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-16"
-        >
-          <div className="bg-white rounded-2xl p-6 lg:p-8 border border-gray-100 shadow-sm">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-invima-50 rounded-xl flex items-center justify-center">
-                <ClipboardList className="w-5 h-5 text-invima-600" />
-              </div>
-              <div>
-                <h3 className="font-bold text-gray-900">Tipos de inspección sanitaria</h3>
-                <p className="text-xs text-gray-500">Modelo IVC con enfoque de riesgos</p>
-              </div>
-            </div>
-            <div className="grid sm:grid-cols-3 gap-4">
-              {tiposInspeccion.map((t, i) => (
-                <motion.div
-                  key={t.title}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: i * 0.08 }}
-                  onMouseEnter={() => setShowInspeccion(i)}
-                  onMouseLeave={() => setShowInspeccion(null)}
-                  className="bg-gray-50 rounded-xl p-5 border border-gray-100 hover:border-invima-200 hover:bg-invima-50 transition-all duration-200 cursor-default"
-                >
-                  <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center mb-3 shadow-sm">
-                    <t.icon className="w-5 h-5 text-invima-600" />
-                  </div>
-                  <h4 className="font-bold text-sm text-gray-900 mb-1">{t.title}</h4>
-                  <div
-                    className="overflow-hidden transition-all duration-300 ease-in-out"
-                    style={{ maxHeight: showInspeccion === i ? '200px' : '0px', opacity: showInspeccion === i ? 1 : 0 }}
-                  >
-                    <div className="pt-2 border-t border-invima-100">
-                      <p className="text-xs text-invima-600 leading-relaxed">{t.desc}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
